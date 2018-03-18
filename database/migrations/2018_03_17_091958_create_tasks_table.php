@@ -15,8 +15,10 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('title');
             $table->text('body');
-            $table->boolean('completed')->default(false);;
+            $table->boolean('is_completed')->default(false);
+            $table->boolean('send_mail')->default(false);
             $table->timestamps();
         });
     }

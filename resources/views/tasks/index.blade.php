@@ -34,10 +34,22 @@
 
             <form method="post" action="{{url('/tasks')}}">
                 <div class="form-group">
-                    {{--<input type="hidden" value="{{csrf_token()}}" name="_token" />--}}
                     {{csrf_field()}}
-                    <label for="title">Task body:</label>
-                    <input type="text" class="form-control" name="body" required/>
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" required/>
+
+
+                    <label for="Body">Body</label>
+                    <textarea class="form-control" name="body" required></textarea>
+
+                    <label for="Body">Send mail ? </label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="send_mail" >
+                        </label>
+                    </div>
+
+
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
@@ -58,6 +70,7 @@
                         <th></th>
                         <th>Task</th>
                         <th>Status</th>
+                        <th>Mail</th>
                         <th>Created</th>
                         <th>Actions</th>
                     </tr>
@@ -67,7 +80,7 @@
                     @foreach($tasks as $task)
                         <tr>
                             {{--<td>{{$task->body}}</td>--}}
-                            {{--<td><a href="">{{$task->completed}}</a></td>--}}
+                            {{--<td><a href="">{{$task->is_completed}}</a></td>--}}
                             <td>
 
                                 <form action="tasks/{{$task->id}}" name="complete_task" method="post">
@@ -76,16 +89,28 @@
                                 </form>
 
                             </td>
-                            <td><a href="{{ url('tasks/'.$task->id) }}">{{$task->body}}</a></td>
+                            <td><a href="{{ url('tasks/'.$task->id) }}">{{$task->title}}</a></td>
                             <td><a href="{{ url('tasks/'.$task->id) }}">
 
-                                    @if( $task->completed == 0)
+                                    @if( $task->is_completed == 0)
                                         InCompleted
                                     @else
                                         Completed
                                     @endif
 
                                 </a></td>
+
+
+                            <td><a href="{{ url('tasks/'.$task->id) }}">
+
+                                    @if( $task->send_mail == 0)
+                                        NO
+                                    @else
+                                        YES
+                                    @endif
+
+                                </a></td>
+
                             <td>{{$task->toDayDateTimeString($task->created_at)}}</td>
                             <td>
                                 <a class="btn btn-small btn-info"

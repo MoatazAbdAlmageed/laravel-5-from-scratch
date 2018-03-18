@@ -41,9 +41,19 @@ class TaskController extends Controller {
 
 		$task = new Task();
 		$this->validate( $request, [
+			'title' => 'required',
 			'body' => 'required|unique:tasks',
+
 		] );
+		$task->title = $request['title'];
 		$task->body = $request['body'];
+		if ($request['send_mail'] == 'on'){
+			$task->send_mail  = 1 ;
+		}
+		else{
+			$task->send_mail  = 0 ;
+		}
+
 		$task->save();
 
 		return redirect( '/tasks' )->with( 'success', $task->body . '  has been created!' );
@@ -81,21 +91,29 @@ class TaskController extends Controller {
 	 */
 	public function update( Request $request, $id ) {
 
-//		$this->validate( $request, [
-//			'body' => 'required',
-//			'completed' => 'required',
-//		] );
-//
-//		Task::find($id)->update($request->all());
 
 		$task = Task::find($id);
 		$this->validate( $request, [
+			'title' => 'required',
 			'body' => 'required',
-			'completed' => 'required',
+			'is_completed' => 'required',
 		] );
 
+
+
+		if ($request['send_mail'] == 'on'){
+			$task->send_mail  = 1 ;
+		}
+		else{
+			$task->send_mail  = 0 ;
+		}
+
+
+
+		$task->title = $request['title'];
 		$task->body = $request['body'];
-		$task->completed = $request['completed'];
+
+		$task->is_completed = $request['is_completed'];
 		$task->update();
 
 
