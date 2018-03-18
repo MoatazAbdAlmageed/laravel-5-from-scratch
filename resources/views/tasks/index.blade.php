@@ -26,37 +26,39 @@
 
 
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Create a new task</h3>
-        </div>
-        <div class="panel-body">
+    {{--<div class="panel panel-default">--}}
+        {{--<div class="panel-heading">--}}
+            {{--<h3 class="panel-title">Create a new task</h3>--}}
+        {{--</div>--}}
+        {{--<div class="panel-body">--}}
 
-            <form method="post" action="{{url('/tasks')}}">
-                <div class="form-group">
-                    {{csrf_field()}}
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" name="title" required/>
-
-
-                    <label for="Body">Body</label>
-                    <textarea class="form-control" name="body" required></textarea>
-
-                    <label for="Body">Send mail ? </label>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="send_mail" >
-                        </label>
-                    </div>
+            {{--<form method="post" action="{{url('/tasks')}}">--}}
+                {{--<div class="form-group">--}}
+                    {{--{{csrf_field()}}--}}
+                    {{--<label for="title">Title</label>--}}
+                    {{--<input type="text" class="form-control" name="title" required/>--}}
 
 
-                </div>
-                <button type="submit" class="btn btn-primary">Create</button>
-            </form>
+                    {{--<label for="Body">Body</label>--}}
+                    {{--<textarea class="form-control" name="body" required></textarea>--}}
 
-        </div>
-    </div>
+                    {{--<label for="Body">Send mail ? </label>--}}
+                    {{--<div class="checkbox">--}}
+                        {{--<label>--}}
+                            {{--<input type="checkbox" name="send_mail" >--}}
+                        {{--</label>--}}
+                    {{--</div>--}}
 
+
+                {{--</div>--}}
+                {{--<button type="submit" class="btn btn-primary">Create</button>--}}
+            {{--</form>--}}
+
+        {{--</div>--}}
+    {{--</div>--}}
+
+ <p>   <a class="btn btn-lg btn-primary"
+          href="{{ URL::to('tasks/create' ) }}">New</a></p>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Tasks</h3>

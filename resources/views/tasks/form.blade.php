@@ -31,7 +31,7 @@
                 <div class="checkbox">
                     <label>
                         <input type="checkbox"
-                               @if ($task->send_mail)
+                               @if (isset($task) &&  $task->send_mail)
                                checked
                                @endif
                                name="send_mail" >
@@ -44,6 +44,13 @@
 
 
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">
+                @if (isset($task))
+                    Update
+                    @else
+                    Create
+                @endif
+
+                </button>
         </div>
     </div>
