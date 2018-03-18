@@ -15,7 +15,6 @@ class TaskController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-
 		$user = User::find(Auth::id());
 		$tasks = $user->tasks()->get();
 		return view( 'tasks.index', compact( 'tasks') );
