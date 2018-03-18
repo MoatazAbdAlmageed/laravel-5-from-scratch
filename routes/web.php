@@ -15,4 +15,5 @@
 
 Route::resource('tasks', 'TaskController');
 Route::resource('/', 'HomeController');
+Route::resource('/home', 'HomeController');
 Auth::routes();

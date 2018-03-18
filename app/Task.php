@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+
 class Task extends Model {
 
 	protected $fillable = [ 'body' ];
@@ -20,4 +21,11 @@ class Task extends Model {
 	protected static function complete() {
 		return static::where( 'completed', 1 )->get();
 	}
+
+
+	public function user()
+	{
+		return $this->belongsTo('App\User');
+	}
+
 }

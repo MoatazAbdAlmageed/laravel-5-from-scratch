@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class TaskController extends Controller {
@@ -13,7 +15,8 @@ class TaskController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$tasks = Task::latest()->get();
+		$user = User::find(Auth::id());
+		$tasks = $user->tasks()->get();
 		return view( 'tasks.index', compact( 'tasks') );
 
 	}
@@ -47,6 +50,10 @@ class TaskController extends Controller {
 		] );
 		$task->title = $request['title'];
 		$task->body = $request['body'];
+
+		$task->user_id = Auth::id();
+
+
 		if ($request['send_mail'] == 'on'){
 			$task->send_mail  = 1 ;
 		}
